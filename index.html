@@ -1,0 +1,123 @@
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+  style-src-elem 'self' https://fonts.googleapis.com;
+  font-src 'self' https://fonts.gstatic.com data:;
+  script-src 'self' 'unsafe-inline';
+  connect-src 'self' http://localhost:3000 http://localhost:3001;
+  img-src 'self' data:;
+">
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <title>ANIME-CHAT</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+
+    <!-- CRT BOOT SCREEN -->
+    <div id="boot-screen">
+      <div class="boot-text">
+        INITIALIZING SYSTEM...<br>
+        LOADING MODULES...<br>
+        STARTING GARDEN OF 2D GIRLS...<br>
+        CONNECTING TO SERVER...<br>
+        <span class="blink">READY_</span>
+      </div>
+    </div>
+
+    <!-- ⭐ CHARACTER SELECT SCREEN -->
+    <div id="character-select" class="character-select hidden">
+
+      <h1 class="char-title">Choose your character</h1>
+
+      <div class="character-list">
+
+        <div class="character-card" data-character="Vanilla">
+          <img src="images/Vanillaa.png">
+          <h2>Vanilla</h2>
+        </div>
+
+        <div class="character-card" data-character="Yae Miko">
+          <img src="images/YaeMiko.png">
+          <h2>Yae Miko</h2>
+        </div>
+
+        <div class="character-card" data-character="Saber">
+          <img src="images/Saber.png">
+          <h2>Saber</h2>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- MAIN APP -->
+    <div class="app hidden" id="chat-app">
+
+      <!-- LEFT PANEL -->
+      <div class="character-pane">
+        <img id="avatar" src="images/neutral.png" class="avatar" />
+        <div class="status">ONLINE</div>
+      </div>
+
+      <!-- RIGHT PANEL -->
+      <div class="chat-pane">
+
+        <div id="messages" class="messages"></div>
+
+        <div id="typing-indicator" class="typing-indicator" style="display:none;">
+          Vanilla is typing..<span class="dots"></span>
+        </div>
+
+        <div class="input-row">
+          <input id="chat-input" type="text" placeholder="Nachricht..." />
+          <button id="send-btn">Send</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SETTINGS BUTTON -->
+    <button id="settingsButton" class="settings-btn">⚙️</button>
+
+    <!-- SETTINGS OVERLAY -->
+    <div id="settingsOverlay" class="settings-overlay hidden">
+      <div class="settings-panel">
+
+        <h2>⚙️ Einstellungen</h2>
+
+        <div class="setting-group">
+          <h3>🔊 Sound</h3>
+          <label><input type="checkbox" id="soundEnabled"> Sound aktiv</label>
+          <label>Lautstärke: <input type="range" id="soundVolume" min="0" max="1" step="0.01"></label>
+          <label><input type="checkbox" id="soundPitch"> Pitch‑Variation</label>
+        </div>
+
+        <div class="setting-group">
+          <h3>🖥️ CRT‑Effekte</h3>
+          <label><input type="checkbox" id="crtEnabled"> CRT aktiv</label>
+        </div>
+
+        <div class="setting-group">
+          <h3>⌨️ Text</h3>
+          <label>Geschwindigkeit: <input type="range" id="textSpeed" min="10" max="80"></label>
+        </div>
+
+        <div class="setting-group">
+          <h3>🎭 Emotionen</h3>
+          <label><input type="checkbox" id="emotionEnabled"> Avatar‑Emotionen aktiv</label>
+        </div>
+
+        <button id="closeSettings">Schließen</button>
+      </div>
+    </div>
+
+    <!-- ⭐ FIXED: MODULE SCRIPT -->
+    <script type="module" src="./animeChat.js"></script>
+
+  </body>
+</html>
