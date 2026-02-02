@@ -12,13 +12,14 @@ export default {
     surprised: "VanillaSurprised.png",
     thinking: "VanillaThinking.png",
     shy: "VanillaShy.png",
-    flustered: "VanillaFlustered.png",
+    flustered: "VanillaFlustered.png", // ShyMeow
     downcast: "VanillaDowncast.png",
     meow: "VanillaMeow.png"
   },
 
-  // Emotion Trigger Keywords
+  // Emotion Trigger Keywords (Nekopara-like)
   emotionTriggers: {
+    // SHY = Vanilla’s typische Reaktion bei Blush
     shy: [
       "blush", "*blush*", "*blushes*",
       "m-me", "um...", "uhh",
@@ -27,6 +28,7 @@ export default {
       "you're teasing me", "don't look at me like that"
     ],
 
+    // FLUSTERED = SHY + MEOW (ShyMeow)
     flustered: [
       "m-meow",
       "meow... *blushes*",
@@ -38,32 +40,38 @@ export default {
       "nya while blushing"
     ],
 
+    // HAPPY = Vanilla’s soft smile
     happy: [
       "haha", "hehe", "yay", "lol",
       "good girl", "nice", "well done",
       "thank you", "thanks"
     ],
 
+    // SAD / DOWNCAST
     sad: [
       "sorry", "forgive me", "i'm sad",
       "i feel bad", "i messed up"
     ],
 
+    // ANGRY = Vanilla’s tsun side (leicht genervt)
     angry: [
       "stop", "no!", "not fair",
       "why would you", "hey!", "baka"
     ],
 
+    // SURPRISED = typische Vanilla-Reaktion
     surprised: [
       "what?!", "eh?!", "really?!",
       "no way", "seriously", "huh?!"
     ],
 
+    // THINKING
     thinking: [
       "hmm", "let me think", "thinking",
       "i wonder", "maybe..."
     ],
 
+    // MEOW
     meow: [
       "meow", "nya", "nyan", "nyaa"
     ]
@@ -98,17 +106,16 @@ export default {
     "meow… this is embarrassing…"
   ],
 
-  //  RUHIGE MICRO-EMOTIONS
+  // Micro Emotion Cycle
   microEmotions: {
-    neutral: ["neutral", "neutral", "neutral", "shy"], 
-    happy: ["happy", "happy", "neutral"],
-    angry: ["angry", "neutral"],
-    sad: ["sad", "downcast", "neutral"],
-    surprised: ["surprised", "neutral"],
-    shy: ["shy", "shy", "neutral"], 
+    neutral: ["neutral", "neutral", "shy"],
+    happy: ["happy", "shy"],
+    angry: ["angry"],
+    sad: ["sad", "downcast"],
+    surprised: ["surprised", "shy"],
+    shy: ["shy", "neutral", "flustered"], // flustered nur hier möglich
     thinking: ["thinking", "neutral"]
   }
 };
-
 
 
