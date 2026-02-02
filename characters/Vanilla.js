@@ -12,31 +12,69 @@ export default {
     surprised: "VanillaSurprised.png",
     thinking: "VanillaThinking.png",
     shy: "VanillaShy.png",
-    flustered: "VanillaFlustered.png",
+    flustered: "VanillaFlustered.png", // ShyMeow
     downcast: "VanillaDowncast.png",
     meow: "VanillaMeow.png"
   },
 
-  // Emotion Trigger Keywords (NEU – balanced)
+  // Emotion Trigger Keywords (Nekopara-like)
   emotionTriggers: {
-    // SHY = Hauptreaktion bei Blush
+    // SHY = Vanilla’s typische Reaktion bei Blush
     shy: [
       "blush", "*blush*", "*blushes*",
       "m-me", "um...", "uhh",
       "embarrassed", "i'm shy",
-      "looks away", "stutter"
+      "looks away", "stutter",
+      "you're teasing me", "don't look at me like that"
     ],
 
-    angry: [
-      "baka"
+    // FLUSTERED = SHY + MEOW (ShyMeow)
+    flustered: [
+      "m-meow",
+      "meow... *blushes*",
+      "nya... *blush*",
+      "shy meow",
+      "meow shy",
+      "meow while blushing",
+      "meow and blush",
+      "nya while blushing"
     ],
-    
-    happy: ["haha", "hehe", "yay", "lol"],
-    sad: ["sorry", "forgive me", "i'm sad"],
-    angry: ["stop", "no!", "not fair"],
-    surprised: ["what?!", "eh?!", "really?!"],
-    thinking: ["hmm", "let me think", "thinking"],
-    meow: ["meow", "nya"]
+
+    // HAPPY = Vanilla’s soft smile
+    happy: [
+      "haha", "hehe", "yay", "lol",
+      "good girl", "nice", "well done",
+      "thank you", "thanks"
+    ],
+
+    // SAD / DOWNCAST
+    sad: [
+      "sorry", "forgive me", "i'm sad",
+      "i feel bad", "i messed up"
+    ],
+
+    // ANGRY = Vanilla’s tsun side (leicht genervt)
+    angry: [
+      "stop", "no!", "not fair",
+      "why would you", "hey!", "baka"
+    ],
+
+    // SURPRISED = typische Vanilla-Reaktion
+    surprised: [
+      "what?!", "eh?!", "really?!",
+      "no way", "seriously", "huh?!"
+    ],
+
+    // THINKING
+    thinking: [
+      "hmm", "let me think", "thinking",
+      "i wonder", "maybe..."
+    ],
+
+    // MEOW
+    meow: [
+      "meow", "nya", "nyan", "nyaa"
+    ]
   },
 
   // User Emotion Commands
@@ -68,17 +106,18 @@ export default {
     "meow… this is embarrassing…"
   ],
 
-  // Micro Emotion Cycle (NEU – flustered SELTEN)
+  // Micro Emotion Cycle (Nekopara-like, flustered nur als shy-upgrade)
   microEmotions: {
-    neutral: ["neutral", "neutral", "shy"], // shy häufiger als flustered
+    neutral: ["neutral", "neutral", "shy"],
     happy: ["happy", "shy"],
     angry: ["angry"],
     sad: ["sad", "downcast"],
     surprised: ["surprised", "shy"],
-    shy: ["shy", "neutral"], // shy bleibt shy
+    shy: ["shy", "neutral", "flustered"], // flustered nur hier möglich
     thinking: ["thinking", "neutral"]
   }
 };
+
 
 
 
