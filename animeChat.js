@@ -264,6 +264,12 @@ function calmEmotionCycle(baseEmotion) {
 }
 
 // =======================================
+// EMOTION COOLDOWN
+// =======================================
+let lastEmotionChange = 0;
+const EMOTION_COOLDOWN = 900; // ms
+
+// =======================================
 // TYPEWRITER EFFECT
 // =======================================
 async function typeWriter(element, text, finalEmotion) {
@@ -278,26 +284,32 @@ async function typeWriter(element, text, finalEmotion) {
     element.textContent += char;
 
     const emo = detectAvatarEmotion(text, char);
-    if (emo && emo !== lastEmotion && !isExplaining) {
-      setEmotion(emo);
-      lastEmotion = emo;
-      lastSwitch = Date.now();
-    }
+    const now = Date.now();
 
-    if (isExplaining) {
-      const now = Date.now();
-      if (now - lastSwitch > 1500 + Math.random() * 1500) {
-        const next = avatarEl.src.includes("Thinking") ? "surprised" : "thinking";
-        setEmotion(next);
+    if (emo && emo !== lastEmotion && !isExplaining) {
+      if (now - lastEmotionChange > EMOTION_COOLDOWN) {
+        setEmotion(emo);
+        lastEmotion = emo;
+        lastEmotionChange = now;
         lastSwitch = now;
       }
     }
 
+    if (isExplaining) {
+      const nowExplain = Date.now();
+      if (nowExplain - lastSwitch > 1500 + Math.random() * 1500) {
+        const next = avatarEl.src.includes("Thinking") ? "surprised" : "thinking";
+        setEmotion(next);
+        lastSwitch = nowExplain;
+      }
+    }
+
     if (!isExplaining && !isThinking) {
-      const now = Date.now();
-      if (now - lastSwitch > 350 + Math.random() * 450) {
-        setEmotion(calmEmotionCycle(lastEmotion));
-        lastSwitch = now;
+      const nowCalm = Date.now();
+      if (nowCalm - lastSwitch > 1200 + Math.random() * 800) {
+        const next = calmEmotionCycle(lastEmotion);
+        setEmotion(next);
+        lastSwitch = nowCalm;
       }
     }
 
@@ -309,7 +321,7 @@ async function typeWriter(element, text, finalEmotion) {
   setTimeout(() => {
     isThinking = false;
     isExplaining = false;
-    setEmotion(finalEmotion || "neutral");
+    setEmotion(finalEmotion || lastEmotion || "neutral");
   }, 1200);
 }
 
@@ -454,6 +466,7 @@ inputEl.addEventListener("keydown", (e) => {
 inputEl.focus();
 
 console.log("animeChat.js fully loaded with modular character system + multi-character sessions.");
+
 
 
 
