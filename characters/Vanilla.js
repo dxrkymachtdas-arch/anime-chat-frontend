@@ -17,7 +17,45 @@ export default {
     meow: "VanillaMeow.png"
   },
 
-  // User Emotion Commands
+  // Emotion Trigger Keywords (NEU – realistisch & anime-like)
+  emotionTriggers: {
+    shy: [
+      "m-me", "blush", "embarrassed", "i'm shy", "looks away",
+      "um...", "uhh", "*blushes*", "stutter"
+    ],
+
+    flustered: [
+      "cute", "pretty", "beautiful", "kiss", "hug", "love",
+      "adorable", "sweet", "handsome", "you make me blush",
+      "stop teasing me", "baka", "flustered"
+    ],
+
+    happy: [
+      "haha", "hehe", "yay", "lol", "nice!", "good!", "awesome"
+    ],
+
+    sad: [
+      "sorry", "forgive me", "i'm sad", "i feel bad"
+    ],
+
+    angry: [
+      "stop", "no!", "not fair", "why would you", "hey!"
+    ],
+
+    surprised: [
+      "what?!", "eh?!", "really?!", "no way", "seriously"
+    ],
+
+    thinking: [
+      "hmm", "let me think", "thinking", "i wonder"
+    ],
+
+    meow: [
+      "meow", "nya"
+    ]
+  },
+
+  // User Emotion Commands (manuelle Steuerung)
   emotionCommands: {
     "angry": "angry",
     "sad": "sad",
@@ -34,7 +72,8 @@ export default {
   // Special Commands
   commands: {
     "meow für mich": "meow",
-    "meow for me": "meow"
+    "meow for me": "meow",
+    "show me your emotions": "showEmotions"
   },
 
   shyMeows: [
@@ -45,14 +84,15 @@ export default {
     "meow… this is embarrassing…"
   ],
 
-  // Micro Emotion Cycle
+  // Micro Emotion Cycle (NEU – flustered häufiger)
   microEmotions: {
-    neutral: ["neutral"],
-    happy: ["happy", "shy"],
+    neutral: ["neutral", "neutral", "flustered"],
+    happy: ["happy", "flustered"],
     angry: ["angry"],
     sad: ["sad", "downcast"],
-    surprised: ["surprised"],
-    shy: ["shy", "neutral"],
+    surprised: ["surprised", "flustered"],
+    shy: ["shy", "flustered", "neutral"],
     thinking: ["thinking", "neutral"]
   }
 };
+
