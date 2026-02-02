@@ -1,3 +1,6 @@
+// =======================================
+// SESSION ID (unique per device)
+// =======================================
 let sessionId = localStorage.getItem("sessionId");
 if (!sessionId) {
   sessionId = crypto.randomUUID();
@@ -187,7 +190,7 @@ function playTypeSound() {
 }
 
 // =======================================
-// USER EMOTION COMMANDS (MODULAR)
+// USER EMOTION COMMANDS
 // =======================================
 function detectUserEmotionCommand(text) {
   if (!activeCharacter) return null;
@@ -227,7 +230,7 @@ function detectAvatarEmotion(text, char) {
 }
 
 // =======================================
-// CALM MICRO-EMOTIONS (MODULAR)
+// CALM MICRO-EMOTIONS
 // =======================================
 function calmEmotionCycle(baseEmotion) {
   if (!activeCharacter) return baseEmotion;
@@ -325,7 +328,7 @@ function createMessageElement(from) {
 }
 
 // =======================================
-// SEND MESSAGE
+// SEND MESSAGE (WITH SESSION ID)
 // =======================================
 async function sendMessage() {
   const msg = inputEl.value.trim();
@@ -362,7 +365,7 @@ async function sendMessage() {
     setEmotion("thinking");
   }
 
-  // CHARACTER COMMANDS (MODULAR)
+  // CHARACTER COMMANDS
   for (const key in activeCharacter.commands) {
     if (msg.toLowerCase().includes(key)) {
 
@@ -391,16 +394,19 @@ async function sendMessage() {
 
   showTyping();
 
-const response = await fetch("https://anime-chat-backend.onrender.com/chat", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    message: msg,
-    history: getHistory(),
-    character: selectedCharacter || "Vanilla"
-  })
-});
-
+  // =======================================
+  // FETCH WITH SESSION ID
+  // =======================================
+  const response = await fetch("https://anime-chat-backend.onrender.com/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      message: msg,
+      history: getHistory(),
+      character: selectedCharacter || "Vanilla",
+      sessionId: sessionId   // <-- WICHTIG!
+    })
+  });
 
   const data = await response.json();
 
@@ -422,7 +428,8 @@ inputEl.addEventListener("keydown", (e) => {
 
 inputEl.focus();
 
-console.log("animeChat.js fully loaded with modular character system.");
+console.log("animeChat.js fully loaded with modular character system + session support.");
+
 
 
 
