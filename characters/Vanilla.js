@@ -17,45 +17,33 @@ export default {
     meow: "VanillaMeow.png"
   },
 
-  // Emotion Trigger Keywords (NEU – realistisch & anime-like)
+  // Emotion Trigger Keywords (NEU – balanced)
   emotionTriggers: {
+    // SHY = Hauptreaktion bei Blush
     shy: [
-      "m-me", "blush", "embarrassed", "i'm shy", "looks away",
-      "um...", "uhh", "*blushes*", "stutter"
+      "blush", "*blush*", "*blushes*",
+      "m-me", "um...", "uhh",
+      "embarrassed", "i'm shy",
+      "looks away", "stutter"
     ],
 
+    // FLUSTERED = SELTEN, nur bei romantischen Sachen
     flustered: [
-      "cute", "pretty", "beautiful", "kiss", "hug", "love",
-      "adorable", "sweet", "handsome", "you make me blush",
-      "stop teasing me", "baka", "flustered"
+      "cute", "pretty", "beautiful",
+      "kiss", "hug", "love",
+      "adorable", "sweet",
+      "stop teasing me", "baka"
     ],
 
-    happy: [
-      "haha", "hehe", "yay", "lol", "nice!", "good!", "awesome"
-    ],
-
-    sad: [
-      "sorry", "forgive me", "i'm sad", "i feel bad"
-    ],
-
-    angry: [
-      "stop", "no!", "not fair", "why would you", "hey!"
-    ],
-
-    surprised: [
-      "what?!", "eh?!", "really?!", "no way", "seriously"
-    ],
-
-    thinking: [
-      "hmm", "let me think", "thinking", "i wonder"
-    ],
-
-    meow: [
-      "meow", "nya"
-    ]
+    happy: ["haha", "hehe", "yay", "lol"],
+    sad: ["sorry", "forgive me", "i'm sad"],
+    angry: ["stop", "no!", "not fair"],
+    surprised: ["what?!", "eh?!", "really?!"],
+    thinking: ["hmm", "let me think", "thinking"],
+    meow: ["meow", "nya"]
   },
 
-  // User Emotion Commands (manuelle Steuerung)
+  // User Emotion Commands
   emotionCommands: {
     "angry": "angry",
     "sad": "sad",
@@ -84,15 +72,17 @@ export default {
     "meow… this is embarrassing…"
   ],
 
-  // Micro Emotion Cycle (NEU – flustered häufiger)
+  // Micro Emotion Cycle (NEU – flustered SELTEN)
   microEmotions: {
-    neutral: ["neutral", "neutral", "flustered"],
-    happy: ["happy", "flustered"],
+    neutral: ["neutral", "neutral", "shy"], // shy häufiger als flustered
+    happy: ["happy", "shy"],
     angry: ["angry"],
     sad: ["sad", "downcast"],
-    surprised: ["surprised", "flustered"],
-    shy: ["shy", "flustered", "neutral"],
+    surprised: ["surprised", "shy"],
+    shy: ["shy", "neutral"], // shy bleibt shy
     thinking: ["thinking", "neutral"]
   }
 };
+
+
 
