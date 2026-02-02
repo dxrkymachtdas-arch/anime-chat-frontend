@@ -149,8 +149,8 @@ function setEmotion(emotion) {
 // SOUNDS
 // =======================================
 window.typeSounds = [
-  new Audio("public/sounds/type1.mp3"),
-  new Audio("public/sounds/type2.mp3"),
+  new Audio("sounds/type1.mp3"),
+  new Audio("sounds/type2.mp3"),
 ];
 
 window.typeSounds.forEach(s => {
@@ -416,3 +416,4 @@ inputEl.addEventListener("keydown", (e) => {
 inputEl.focus();
 
 console.log("animeChat.js fully loaded with modular character system.");
+
