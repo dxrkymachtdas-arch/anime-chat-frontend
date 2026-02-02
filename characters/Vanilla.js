@@ -27,14 +27,10 @@ export default {
       "looks away", "stutter"
     ],
 
-    // FLUSTERED = SELTEN, nur bei romantischen Sachen
-    flustered: [
-      "cute", "pretty", "beautiful",
-      "kiss", "hug", "love",
-      "adorable", "sweet",
-      "stop teasing me", "baka"
+    angry: [
+      "baka"
     ],
-
+    
     happy: ["haha", "hehe", "yay", "lol"],
     sad: ["sorry", "forgive me", "i'm sad"],
     angry: ["stop", "no!", "not fair"],
@@ -59,7 +55,7 @@ export default {
 
   // Special Commands
   commands: {
-    "meow für mich": "meow",
+    "meow": "meow",
     "meow for me": "meow",
     "show me your emotions": "showEmotions"
   },
@@ -83,6 +79,7 @@ export default {
     thinking: ["thinking", "neutral"]
   }
 };
+
 
 
 
