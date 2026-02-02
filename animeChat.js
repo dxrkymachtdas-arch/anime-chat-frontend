@@ -385,15 +385,16 @@ async function sendMessage() {
 
   showTyping();
 
-  const response = await fetch("https://anime-chat-backend.onrender.com" , {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      message: msg,
-      history: getHistory(),
-      character: selectedCharacter || "Vanilla"
-    })
-  });
+const response = await fetch("https://anime-chat-backend.onrender.com/chat", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    message: msg,
+    history: getHistory(),
+    character: selectedCharacter || "Vanilla"
+  })
+});
+
 
   const data = await response.json();
 
@@ -416,6 +417,7 @@ inputEl.addEventListener("keydown", (e) => {
 inputEl.focus();
 
 console.log("animeChat.js fully loaded with modular character system.");
+
 
 
 
