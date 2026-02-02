@@ -1,18 +1,19 @@
-<meta http-equiv="Content-Security-Policy" content="
-  default-src 'self';
-  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-  style-src-elem 'self' https://fonts.googleapis.com;
-  font-src 'self' https://fonts.gstatic.com data:;
-  script-src 'self' 'unsafe-inline';
-  connect-src 'self' https://anime-chat-backend.onrender.com;
-  img-src 'self' data:;
-">
-
-
 <!DOCTYPE html>
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
+
+    <!-- ✅ FIXED: CSP muss im <head> stehen -->
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      style-src-elem 'self' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com data:;
+      script-src 'self' 'unsafe-inline';
+      connect-src 'self' https://anime-chat-backend.onrender.com;
+      img-src 'self' data:;
+    ">
+
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <title>ANIME-CHAT</title>
     <link rel="stylesheet" href="style.css" />
@@ -117,10 +118,11 @@
       </div>
     </div>
 
-    <!-- ⭐ FIXED: MODULE SCRIPT -->
+    <!-- ⭐ MODULE SCRIPT -->
     <script type="module" src="./animeChat.js"></script>
 
   </body>
 </html>
+
 
 
