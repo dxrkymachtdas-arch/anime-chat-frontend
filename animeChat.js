@@ -328,7 +328,7 @@ function createMessageElement(from) {
 }
 
 // =======================================
-// SEND MESSAGE (WITH SESSION ID)
+// SEND MESSAGE (WITH SESSION + CHARACTER MEMORY)
 // =======================================
 async function sendMessage() {
   const msg = inputEl.value.trim();
@@ -337,7 +337,8 @@ async function sendMessage() {
   const userEl = createMessageElement("user");
   userEl.textContent = msg;
 
-  addUserMessage(msg);
+  // NEW: Multi-character memory
+  addUserMessage(selectedCharacter, msg);
   inputEl.value = "";
 
   const userEmotion = detectUserEmotionCommand(msg);
@@ -349,11 +350,11 @@ async function sendMessage() {
     msg.toLowerCase().includes("wipe memory") ||
     msg.toLowerCase().includes("forget everything")
   ) {
-    resetMemory();
+    resetMemory(selectedCharacter);
 
     const aiEl = createMessageElement("ai");
     const line = "My memory has been reset.";
-    addAssistantMessage(line);
+    addAssistantMessage(selectedCharacter, line);
     await typeWriter(aiEl, line, "neutral");
     return;
   }
@@ -376,7 +377,7 @@ async function sendMessage() {
         const line = activeCharacter.shyMeows[
           Math.floor(Math.random() * activeCharacter.shyMeows.length)
         ];
-        addAssistantMessage(line);
+        addAssistantMessage(selectedCharacter, line);
         const aiEl = createMessageElement("ai");
         setEmotion("meow");
         await typeWriter(aiEl, line, "shy");
@@ -384,7 +385,7 @@ async function sendMessage() {
       }
 
       // normal command
-      addAssistantMessage(emotion);
+      addAssistantMessage(selectedCharacter, emotion);
       const aiEl = createMessageElement("ai");
       setEmotion(emotion);
       await typeWriter(aiEl, emotion, "neutral");
@@ -395,22 +396,22 @@ async function sendMessage() {
   showTyping();
 
   // =======================================
-  // FETCH WITH SESSION ID
+  // FETCH WITH SESSION + CHARACTER HISTORY
   // =======================================
   const response = await fetch("https://anime-chat-backend.onrender.com/chat", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       message: msg,
-      history: getHistory(),
+      history: getHistory(selectedCharacter),
       character: selectedCharacter || "Vanilla",
-      sessionId: sessionId   // <-- WICHTIG!
+      sessionId: sessionId
     })
   });
 
   const data = await response.json();
 
-  addAssistantMessage(data.reply);
+  addAssistantMessage(selectedCharacter, data.reply);
 
   hideTyping();
 
@@ -428,10 +429,7 @@ inputEl.addEventListener("keydown", (e) => {
 
 inputEl.focus();
 
-console.log("animeChat.js fully loaded with modular character system + session support.");
-
-
-
+console.log("animeChat.js fully loaded with modular character system + multi-character sessions.");
 
 
 
