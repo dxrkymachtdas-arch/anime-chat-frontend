@@ -218,14 +218,38 @@ function detectExplainCommand(text) {
 }
 
 // =======================================
-// DETECT STRONG EMOTIONS
+// DETECT AVATAR EMOTION (CHARACTER-BASED + SHYMEOW)
 // =======================================
 function detectAvatarEmotion(text, char) {
+  if (!activeCharacter) return null;
+
   const t = text.toLowerCase();
+
+  // 1. Surprise by punctuation
   if (char === "!") return "surprised";
-  if (t.includes("haha") || t.includes("lol")) return "happy";
-  if (t.includes("sorry") || t.includes("i am sorry")) return "sad";
-  if (t.includes("no") || t.includes("not") || t.includes("stop")) return "angry";
+
+  // 2. Check all triggers from character file
+  if (activeCharacter.emotionTriggers) {
+    for (const emotion in activeCharacter.emotionTriggers) {
+      const triggers = activeCharacter.emotionTriggers[emotion];
+      for (const trigger of triggers) {
+        if (t.includes(trigger)) return emotion;
+      }
+    }
+  }
+
+  // 3. Special case: Shy + Meow = Flustered (ShyMeow)
+  if (
+    activeCharacter.emotionTriggers &&
+    activeCharacter.emotionTriggers.shy &&
+    activeCharacter.emotionTriggers.meow
+  ) {
+    const shyHit = activeCharacter.emotionTriggers.shy.some(k => t.includes(k));
+    const meowHit = activeCharacter.emotionTriggers.meow.some(k => t.includes(k));
+    if (shyHit && meowHit) return "flustered";
+  }
+
+  // 4. Default: no strong emotion
   return null;
 }
 
@@ -285,7 +309,7 @@ async function typeWriter(element, text, finalEmotion) {
   setTimeout(() => {
     isThinking = false;
     isExplaining = false;
-    setEmotion("neutral");
+    setEmotion(finalEmotion || "neutral");
   }, 1200);
 }
 
@@ -337,7 +361,7 @@ async function sendMessage() {
   const userEl = createMessageElement("user");
   userEl.textContent = msg;
 
-  // NEW: Multi-character memory
+  // Multi-character memory
   addUserMessage(selectedCharacter, msg);
   inputEl.value = "";
 
@@ -430,6 +454,7 @@ inputEl.addEventListener("keydown", (e) => {
 inputEl.focus();
 
 console.log("animeChat.js fully loaded with modular character system + multi-character sessions.");
+
 
 
 
