@@ -1,3 +1,9 @@
+let sessionId = localStorage.getItem("sessionId");
+if (!sessionId) {
+  sessionId = crypto.randomUUID();
+  localStorage.setItem("sessionId", sessionId);
+}
+
 // =======================================
 // MEMORY IMPORT
 // =======================================
@@ -417,6 +423,7 @@ inputEl.addEventListener("keydown", (e) => {
 inputEl.focus();
 
 console.log("animeChat.js fully loaded with modular character system.");
+
 
 
 
